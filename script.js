@@ -1,5 +1,22 @@
 const materials = ["rock", "paper", "scissors"];
 
+const pcChoice = document.getElementById('pc');
+
+const container = document.getElementById('container');
+const gameContainer = document.querySelector('.choices');
+
+const roundResult = document.getElementById('roundResult');
+const finalResult = document.getElementById('finalResult');
+const scores = document.getElementById('scores');
+const roundCount = document.getElementById('roundCount');
+
+const buttons = document.querySelectorAll('.buttons');
+
+const playButton = document.createElement('div');
+
+// Execute the game
+game(buttons);
+
 function computerPlay() {
     const randomElement = materials[Math.floor(Math.random() * materials.length)];
     return randomElement;
@@ -7,59 +24,82 @@ function computerPlay() {
 
 function playRound(playerSelection, computerPlay) {
     if (playerSelection.toLowerCase() === computerPlay) {
-        console.log("Tie!");
+        roundResult.textContent = "Tie!";
     }
     else if (playerSelection.toLowerCase() == "rock" && computerPlay == "paper") {
-        console.log("You lose! Paper beats rock!");
+        roundResult.textContent = "You lose! Paper beats rock!";
         return false;
     }
     else if (playerSelection.toLowerCase() == "rock" && computerPlay == "scissors"){
-        console.log("You win! Rock beats scissors!");
+        roundResult.textContent = "You win! Rock beats scissors!";
         return true;
     }
     else if (playerSelection.toLowerCase() == "paper" && computerPlay == "rock"){
-        console.log("You win! Paper beats rock!");
+        roundResult.textContent = "You win! Paper beats rock!";
         return true;
     }
     else if (playerSelection.toLowerCase() == "paper" && computerPlay == "scissors"){
-        console.log("You lose! Scissors beats paper!")
+        roundResult.textContent = "You lose! Scissors beats paper!";
         return false;
     }
     else if (playerSelection.toLowerCase() == "scissors" && computerPlay == "rock"){
-        console.log("You lose! Rock beats scissors!")
+        roundResult.textContent = "You lose! Rock beats scissors!";
         return false;
     }
     else {
-        console.log("You win! Scissors beat paper!")
+        roundResult.textContent = "You win! Scissors beat paper!";
         return true;
     }
 }
 
-function game() {
-    let wins = 0;
-    let losses = 0;
+// Getting user input and play the game
+function game(buttons) {
+    let win = 0;
+    let loss = 0;
+    let count = 1;
 
-    for (let i = 0; i < 5; i++)
-    {
-        const playerSelection = prompt("Rock Paper Scissors?");
-        const computerSelection = computerPlay();
-        const result = playRound(playerSelection, computerSelection)
+    roundCount.textContent = count;
 
-        if (result == true) {
-            wins++;
-        }
-        else if (result == false){
-            losses++;
-        }
-    }
+    buttons.forEach(choice => {
+        /* Listen for user's desired button click and increment the count
+        After round count, game is over.*/
+        choice.addEventListener('click', () => {
+            count++;
+            roundCount.textContent = count;
 
-    if (wins > losses) {
-        console.log("You won! Congratulations!");
-    }
-    else if (wins < losses) {
-        console.log("You lost! :(");
-    }
-    else {
-        console.log("Tie!");
-    }
+            const computerSelection = computerPlay();
+            const result = playRound(choice.value, computerSelection);
+
+            if (result == true){
+                roundResult.style.color = 'green';
+                win++;
+            }
+            else if (result === false){
+                roundResult.style.color = 'red';
+                loss++;
+            }
+            else roundResult.style.color = 'blue';
+            // Display scores
+            scores.textContent = `You: ${win} | Computer: ${loss}`;
+            // Display computer's choice
+            pcChoice.textContent = computerSelection.toUpperCase();
+            
+            while(win == 5 || loss == 5){
+                if (win == 5){
+                    roundCount.textContent = '';                   
+                    finalResult.innerHTML = 'You won! Congratulations!&#129395;';
+                }
+                else if(loss == 5) {
+                    finalResult.innerHTML = 'You lost!&#128553;';
+                }
+
+                // If game is over, remove the controls.
+                gameContainer.remove();
+                // Play again button
+                playButton.innerHTML = "<a id='again' href='#' onclick='location.reload()'>Play again</a>"
+                container.appendChild(playButton);
+                break;
+            }
+        })
+    });
 }
