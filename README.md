@@ -11,8 +11,8 @@ This is the final product of Rock, Paper, Scissors from The Odin Project.
 
 ## Screenshots
 
-![Ongoing View](https://postimg.cc/tY5PvTmz)(https://postimg.cc/tY5PvTmz)
-![Final Result View](https://postimg.cc/0zRhrnqV)(https://postimg.cc/0zRhrnqV)
+[![Ongoing View](https://i.postimg.cc/x1rRCNvB/Screenshot-from-2021-08-05-21-52-22.png)](https://postimg.cc/tY5PvTmz)
+[![Final Result View](https://i.postimg.cc/K8Rbqpph/Screenshot-from-2021-08-05-21-52-40.png)](https://postimg.cc/0zRhrnqV)
 
 ## Credit
 
