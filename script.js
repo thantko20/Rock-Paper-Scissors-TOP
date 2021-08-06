@@ -1,17 +1,12 @@
 const materials = ["rock", "paper", "scissors"];
-
 const pcChoice = document.getElementById('pc');
-
 const container = document.getElementById('container');
 const gameContainer = document.querySelector('.choices');
-
 const roundResult = document.getElementById('roundResult');
 const finalResult = document.getElementById('finalResult');
 const scores = document.getElementById('scores');
 const roundCount = document.getElementById('roundCount');
-
 const buttons = document.querySelectorAll('.buttons');
-
 const playButton = document.createElement('div');
 
 // Execute the game
@@ -23,26 +18,26 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerPlay) {
-    if (playerSelection.toLowerCase() === computerPlay) {
+    if (playerSelection === computerPlay) {
         roundResult.textContent = "Tie!";
     }
-    else if (playerSelection.toLowerCase() == "rock" && computerPlay == "paper") {
+    else if (playerSelection == "rock" && computerPlay == "paper") {
         roundResult.textContent = "You lose! Paper beats rock!";
         return false;
     }
-    else if (playerSelection.toLowerCase() == "rock" && computerPlay == "scissors"){
+    else if (playerSelection == "rock" && computerPlay == "scissors"){
         roundResult.textContent = "You win! Rock beats scissors!";
         return true;
     }
-    else if (playerSelection.toLowerCase() == "paper" && computerPlay == "rock"){
+    else if (playerSelection == "paper" && computerPlay == "rock"){
         roundResult.textContent = "You win! Paper beats rock!";
         return true;
     }
-    else if (playerSelection.toLowerCase() == "paper" && computerPlay == "scissors"){
+    else if (playerSelection == "paper" && computerPlay == "scissors"){
         roundResult.textContent = "You lose! Scissors beats paper!";
         return false;
     }
-    else if (playerSelection.toLowerCase() == "scissors" && computerPlay == "rock"){
+    else if (playerSelection == "scissors" && computerPlay == "rock"){
         roundResult.textContent = "You lose! Rock beats scissors!";
         return false;
     }
